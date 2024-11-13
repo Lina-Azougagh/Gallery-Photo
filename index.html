@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview</title>
+    <style>
+        #image {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="image">Survolez une image ci-dessous pour l'afficher ici</div>
+    <img src="image1.jpg" alt="Image 1" class="thumbnail" />
+    <img src="image2.jpg" alt="Image 2" class="thumbnail" />
+    <img src="image3.jpg" alt="Image 3" class="thumbnail" />
+
+    <script>
+        function upDate(previewPic) {
+            console.log('Événement déclenché');
+            
+            
+            console.log('Alt:', previewPic.alt);
+            console.log('Source:', previewPic.src);
+            
+            
+            document.getElementById('image').innerText = previewPic.alt;
+
+           
+            document.getElementById('image').style.backgroundImage = `url('${previewPic.src}')`;
+        }
+
+        function unDo() {
+            
+            document.getElementById('image').style.backgroundImage = "url('')";
+            
+            
+            document.getElementById('image').innerText = "Survolez une image ci-dessous pour l'afficher ici";
+        }
+
+        
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('mouseover', () => upDate(thumbnail));
+            thumbnail.addEventListener('mouseout', unDo);
+        });
+    </script>
+</body>
+</html>
